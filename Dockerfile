@@ -10,5 +10,6 @@ RUN apk add -U ca-certificates git curl && \
     chmod +x /usr/local/bin/helm && \
     rm -rf linux-amd64 && \
     rm helm.tar.gz && \
+    rm /var/cache/apk/*
 
 RUN helm version
