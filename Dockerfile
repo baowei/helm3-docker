@@ -1,21 +1,14 @@
-FROM debian:latest AS build
+FROM alpine:3.12
 
-ENV HELM_VERSION=3.2.2
-ENV RELEASE_ROOT="https://get.helm.sh"
-ENV RELEASE_FILE="helm-v${HELM_VERSION}-linux-amd64.tar.gz"
+ENV HELM_LATEST_VERSION v3.2.2
 
-RUN apt-get update && apt-get install curl -y && \
-    curl -L ${RELEASE_ROOT}/${RELEASE_FILE} |tar xvz && \
-    mv linux-amd64/helm /usr/bin/helm && \
-    chmod +x /usr/bin/helm
+RUN apk add -U ca-certificates git curl && \
+    apk add -U -t deps curl && \
+    curl -o helm.tar.gz https://get.helm.sh/helm-${HELM_LATEST_VERSION}-linux-amd64.tar.gz && \
+    tar -xvf helm.tar.gz && \
+    mv linux-amd64/helm /usr/local/bin && \
+    chmod +x /usr/local/bin/helm && \
+    rm -rf linux-amd64 && \
+    rm helm.tar.gz && \
 
-FROM bitnami/kubectl:latest
-
-LABEL maintainer="thorsten.hans@gmail.com"
-
-COPY --from=build /usr/bin/helm /usr/bin/helm
-
-WORKDIR /app
-
-ENTRYPOINT ["helm"]
-CMD ["-h"]
+RUN helm version
