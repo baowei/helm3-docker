@@ -1,4 +1,4 @@
-FROM python:3.7.7-stretch
+FROM python:3.7.7-slim-stretch
 
 ENV HELM_LATEST_VERSION v3.2.3
 ENV PATH="/root/.local/bin:$PATH"
