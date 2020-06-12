@@ -5,7 +5,7 @@ ENV PATH="/root/.local/bin:$PATH"
 ENV PYTHONIOENCODING=UTF-8
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-		ca-certificates \
+	ca-certificates \
         git curl jq \
         curl -o helm.tar.gz https://get.helm.sh/helm-${HELM_LATEST_VERSION}-linux-amd64.tar.gz && \
         tar -xvf helm.tar.gz && \
@@ -14,6 +14,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         rm -rf linux-amd64 && \
         rm helm.tar.gz && \
         pip install awscli && \
-	    && rm -rf /var/lib/apt/lists/*
+	rm -rf /var/lib/apt/lists/*
 
 RUN helm version
