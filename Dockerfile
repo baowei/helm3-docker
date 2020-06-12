@@ -1,6 +1,6 @@
-FROM python:3.7.7-alpine3.12
+FROM python:3.7.7-stretch
 
-ENV HELM_LATEST_VERSION v3.2.2
+ENV HELM_LATEST_VERSION v3.2.3
 ENV PATH="/root/.local/bin:$PATH"
 ENV PYTHONIOENCODING=UTF-8
 
