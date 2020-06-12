@@ -15,5 +15,6 @@ RUN apk add -U ca-certificates git curl jq  bash && \
     rm helm.tar.gz && \
     pip install awscli && \
     rm /var/cache/apk/*
+RUN  rm -f /bin/sh && ln -sfT /bin/bash /bin/sh    
 
 RUN helm version
